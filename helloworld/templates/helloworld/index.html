@@ -1,0 +1,7 @@
+<h2>Hello, world. You're at the Django MySQL index.</h2>
+
+<form action="/submit/" method="post">
+    {% csrf_token %}
+    <input type="text" placeholder="Name..." name="name" />
+    <input type="submit" value="Submit" />
+</form>

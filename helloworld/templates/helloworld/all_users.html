@@ -1,0 +1,12 @@
+{% if users_list %}
+    <h2>Registered Users</h2>
+    <ul>
+    {% for user in users_list %}
+        <li>{{ user.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No users have been registered yet.</p>
+{% endif %}
+
+<a href="/">Go Back Home</a>

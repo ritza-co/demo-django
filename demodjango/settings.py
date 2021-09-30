@@ -25,12 +25,13 @@ SECRET_KEY = 'oez0lb@p*x5ib$y&z0u_^ef+az2sf7&h6ub$mnz&7(3xb_(si='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', '127.0.0.1', '0.0.0.0', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'helloworld.apps.HelloworldConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,13 +74,21 @@ WSGI_APPLICATION = 'demodjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+import dj_database_url
 
+db_url = os.environ.get("DATABASE_URL", False)
+
+if db_url:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
